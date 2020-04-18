@@ -1,0 +1,74 @@
+header{
+    background: gray;
+    color: floralwhite;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+
+footer{
+    background-color: gray;
+    color: blanchedalmond;
+    text-align: center;
+}
+
+
+#logo{
+    height: 100px;
+    width: 100px;
+}
+
+
+.logo_img{
+    width: 30%;
+}
+/* 
+a{
+    float: left;
+    color: black;
+    text-align: center;
+    text-decoration: gray;
+    padding: 12px;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 6px;
+}
+
+a.active{
+    background-color: dodgerblue;
+    color: floralwhite;
+}
+
+a:hover{
+    background-color: rgb(247, 213, 140);
+    color: black;
+} */
+
+
+
+#main{
+    height: 550px;
+    background-color: blanchedalmond;
+    border-radius: 2px solid red;
+    text-align: left;
+    padding-left: 20px;
+    color: black;
+}
+
+
+div.gallery {
+    margin: 10px;
+    border: none;
+    float: left;
+    width: 200px;
+    height: 300px;
+   }
+   div.gallery img {
+    width: 100%;
+    height: auto;
+   }
+   div.desc {
+    padding: 5px;
+    font-weight: 300;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+   }

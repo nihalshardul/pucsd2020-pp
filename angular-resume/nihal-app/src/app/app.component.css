@@ -1,0 +1,65 @@
+header{
+    background: gray;
+    color: floralwhite;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+
+footer{
+    background-color: gray;
+    color: blanchedalmond;
+    text-align: center;
+}
+
+
+.navbar{
+    background-color: whitesmoke;
+}
+
+.navbar-nav{
+    text-align: center;
+    margin-left: 150px;;
+}
+
+
+#logo{
+    height: 100px;
+    width: 100px;
+}
+
+
+.logo_img{
+    width: 30%;
+}
+
+a{
+    float: left;
+    color: black;
+    text-align: center;
+    text-decoration: gray;
+    padding: 12px;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 6px;
+}
+
+a.active{
+    background-color: dodgerblue;
+    color: floralwhite;
+}
+
+a:hover{
+    background-color: rgb(247, 213, 140);
+    color: black;
+}
+
+
+
+#main{
+    height: 450px;
+    background-color: blanchedalmond;
+    border-radius: 2px solid red;
+    text-align: left;
+    padding-left: 250px;
+    color: black;
+}

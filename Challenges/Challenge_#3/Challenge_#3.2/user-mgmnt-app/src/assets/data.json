@@ -1,0 +1,8 @@
+[
+    {"id":"1","first_name":"Mangesh","last_name":"Sonawne","email":"mangesh@gmail.com","password":"mangu@123","contact_number":"9856457589","updated_by":0},
+    {"id":"2","first_name":"Nihal","last_name":"Shardul","email":"nihal.shardul@gmail.com","password":"Nihal@123","contact_number":"7840904676","updated_by":0},
+    {"id":"3","first_name":"Yogesh","last_name":"Giddu","email":"yogi@gmail.com","password":"yogi@123","contact_number":"9856475486","updated_by":0},
+    {"id":"4","first_name":"Bhushan","last_name":"Neru","email":"bhuchan@gmail.com","password":"naru@123","contact_number":"9854675824","updated_by":0},
+    {"id":"5","first_name":"yuva","last_name":"jadhav","email":"yuva@gmail.com","password":"9852","contact_number":"444444444","updated_by":0},
+    {"id":"6","first_name":"Man","last_name":"ahuja","email":"man@gmail.com","password":"965452","contact_number":"5544455","updated_by":0}
+]
