@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS user_group (
     permission_num      INT    NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user(user_id) On UPDATE CASCADE On DELETE CASCADE,
     FOREIGN KEY(group_id) REFERENCES groups(group_id) On UPDATE CASCADE On DELETE CASCADE,
-    FOREIGN KEY(permission_num) REFERENCES permission(permission_num) On UPDATE CASCADE On DELETE CASCADE
+    FOREIGN KEY(permission_num) REFERENCES permission(permission_num)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS dir (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS dir (
     user_id             INT         PRIMARY KEY,
     permission_num      INT    NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user(user_id) On UPDATE CASCADE On DELETE CASCADE,
-    FOREIGN KEY(permission_num) REFERENCES permission(permission_num) On UPDATE CASCADE On DELETE CASCADE
+    FOREIGN KEY(permission_num) REFERENCES permission(permission_num)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS files (
@@ -44,6 +44,6 @@ CREATE TABLE IF NOT EXISTS files (
     user_id             INT         PRIMARY KEY,
     permission_num      INT    NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user(user_id) On UPDATE CASCADE On DELETE CASCADE,
-    FOREIGN KEY(permission_num) REFERENCES permission(permission_num) On UPDATE CASCADE On DELETE CASCADE
+    FOREIGN KEY(permission_num) REFERENCES permission(permission_num)
 )ENGINE = INNODB CHARACTER SET=utf8;
 
