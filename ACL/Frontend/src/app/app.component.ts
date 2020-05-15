@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ApiService } from './api.service';
+import { UserloginService } from './userlogin.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ACL';
+
+  message:boolean;
+  constructor( private value: UserloginService) { }
+
+  ngOnInit(): void {
+    this.value.sharedMessage.subscribe(message => this.message = message)
+  }
+
 }

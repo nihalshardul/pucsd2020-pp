@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from "./models/user";
 import { Group } from "./models/group";
+import { Usergroup } from "./models/usergroup";
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,25 +39,30 @@ export class ApiService {
   //   return this.httpClient.get(`${this.apiURL}/user/${user.email}/${user.password}`);   //for login we need username and password
   // }
   public createGroup(group: Group){
-    return this.httpClient.post(`${this.apiURL}group`,group);
+    return this.httpClient.post(`${this.apiURL}groups`,group);
   
   }
 
   public updateGroup(group: Group){
-    return this.httpClient.put(`${this.apiURL}group/${group.id}`,group);
+    return this.httpClient.put(`${this.apiURL}groups/${group.id}`,group);
   }
 
   public deleteGroup(id: number){
-    return this.httpClient.delete(`${this.apiURL}group/${id}`);
+    return this.httpClient.delete(`${this.apiURL}groups/${id}`);
   }
 
   public getGroupById(id: number){
-    return this.httpClient.get(`${this.apiURL}/group/${id}`);   //endpoint
+    return this.httpClient.get(`${this.apiURL}/groups/${id}`);   //endpoint
   }
 
   public getGroup(){
-    return this.httpClient.get(`${this.apiURL}group`); 
+    return this.httpClient.get(`${this.apiURL}groups`); 
   }
 
+  public addUserGroup(){
+    return this.httpClient.get(`${this.apiURL}usergroup`); 
+  }
+
+  
 
 }

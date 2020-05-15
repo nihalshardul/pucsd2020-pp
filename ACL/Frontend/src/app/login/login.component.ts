@@ -1,6 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ApiService } from '../api.service';
 import {Router} from '@angular/router';
+import { UserloginService } from '../userlogin.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,15 +11,20 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private value: UserloginService ) { }
+  message : boolean;
+
 
   ngOnInit(): void {
+    this.value.sharedMessage.subscribe(islogin => this.message = this.message)
+
   }
   root_user: Number;
   email: String;
   password : String;
-
-
+  onlogin : number = 0;
+  
+  // @Output() islogin = new EventEmitter();
 
   validation = function(data){
     this.email = data.email,
@@ -25,6 +32,8 @@ export class LoginComponent implements OnInit {
 
     if (this.email == 'admin' && this.password == 'admin'){
       this.root_user = 1
+      // this.islogin.emit(this.islogin)
+      this.value.nextMessage(true)
       this.router.navigate(["home"])
     }else{
       alert("Invalid Credentials...")

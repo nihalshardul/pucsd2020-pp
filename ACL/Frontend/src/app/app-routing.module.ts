@@ -10,12 +10,15 @@ import { SearchgroupComponent } from './GroupOperations/searchgroup/searchgroup.
 import { DeletegroupComponent } from './GroupOperations/deletegroup/deletegroup.component';
 import { UpdategroupComponent } from './GroupOperations/updategroup/updategroup.component';
 import { CreategroupComponent } from './GroupOperations/creategroup/creategroup.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home' ,component: HomeComponent},
-  {path: 'home/createuser' , component: CreateuserComponent},
+  {path: 'sidebar' , component: SidebarComponent},
+  {path: 'createuser' , component: CreateuserComponent},
   {path: 'updateuser' , component: UpdateuserComponent},
   {path: 'deleteuser' , component: DeleteuserComponent},
   {path: 'searchuser' , component: SearchuserComponent},

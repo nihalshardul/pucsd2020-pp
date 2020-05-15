@@ -3,6 +3,7 @@ header{
     color: floralwhite;
     display: grid;
     grid-template-columns: 2fr 5fr;
+    background-image: url(/assets/bg.png);
 }
 
 footer{

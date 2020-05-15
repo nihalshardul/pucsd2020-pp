@@ -1,3 +1,9 @@
+#log{
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 50px;
+}
+
 .row {
     margin-top: 5%;
     margin-left: 2%;

@@ -15,6 +15,11 @@ import { SearchgroupComponent } from './GroupOperations/searchgroup/searchgroup.
 import { DeletegroupComponent } from './GroupOperations/deletegroup/deletegroup.component';
 import { UpdategroupComponent } from './GroupOperations/updategroup/updategroup.component';
 import { CreategroupComponent } from './GroupOperations/creategroup/creategroup.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { MembershipComponent } from './GroupOperations/membership/membership.component';
+import { GrantPermissionComponent } from './GroupOperations/grant-permission/grant-permission.component';
+import { ListResourcesComponent } from './ResourceOperations/list-resources/list-resources.component';
+import { CreateResourcesComponent } from './ResourceOperations/create-resources/create-resources.component';
 
 
 @NgModule({
@@ -29,7 +34,12 @@ import { CreategroupComponent } from './GroupOperations/creategroup/creategroup.
     SearchgroupComponent,
     DeletegroupComponent,
     UpdategroupComponent,
-    CreategroupComponent
+    CreategroupComponent,
+    SidebarComponent,
+    MembershipComponent,
+    GrantPermissionComponent,
+    ListResourcesComponent,
+    CreateResourcesComponent
   ],
   imports: [
     BrowserModule,

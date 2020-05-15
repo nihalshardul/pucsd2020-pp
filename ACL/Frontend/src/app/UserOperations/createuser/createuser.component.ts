@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { UserloginService } from "../../userlogin.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createuser',
@@ -8,14 +10,22 @@ import { ApiService } from '../../api.service';
 })
 export class CreateuserComponent implements OnInit {
 
-  constructor(private _api : ApiService) { }
+  message:boolean;
+
+  constructor(private _api : ApiService, private value: UserloginService, private router: Router) { }
 
   ngOnInit(): void {
+    this.value.sharedMessage.subscribe(message => this.message = message)
+    if (this.message == false){
+      this.router.navigate(["login"])
+    }
   }
 
   newuser: Object  = {} ;
   isAdded: Boolean = false;
   Confirmation: String = "New User has been Registered.";
+
+  @Input() islogin: number;
 
 
   post = function(data){
