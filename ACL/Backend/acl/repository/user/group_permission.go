@@ -43,10 +43,10 @@ func (grouppermission *grouppermissionRepository) Update(cntx context.Context, o
 	return obj, err
 }
 
-func (grouppermission *grouppermissionRepository) Delete(cntx context.Context, id int64) error {
+func (grouppermission *grouppermissionRepository) Delete(cntx context.Context, id int64) (interface{}, error){
 	//log.Printf("Getting context and creating model.GroupPermission object repository/grouppermission module")
 	obj := &model.GroupPermission{Id: id}
-	return driver.SoftDeleteById(grouppermission.conn, obj, id)
+	return driver.DeleteById(grouppermission.conn, obj, id)
 }
 
 func (grouppermission *grouppermissionRepository) GetAll(cntx context.Context) ([]interface{}, error) {

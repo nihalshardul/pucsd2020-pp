@@ -1,0 +1,47 @@
+//user
+http://localhost:9090/webapi/v1/user
+
+
+//groups
+
+http://localhost:9090/webapi/v1/groups
+
+//resources
+curl -X GET http://localhost:9090/webapi/v1/resources
+
+
+//usergroup
+
+curl -X GET http://localhost:9090/webapi/v1/usergroup
+
+//userpermission
+curl -X GET http://localhost:9090/webapi/v1/userpermission
+
+//grouppermission
+curl -X GET http://localhost:9090/webapi/v1/grouppermission
+
+resourcetype:
+curl -X GET http://localhost:9090/webapi/v1/resourcestype
+
+
+
+user:
+
+curl -X POST -d'{"first_name":"a","last_name":"z","email":"az@acl.com","password":"az" ,"is_user_root":0}' http://localhost:9090/webapi/v1/user
+
+
+groups post
+
+curl -X POST -d '{ "id":2,"group_name":"gr15"}' http://localhost:9090/webapi/v1/groups
+
+curl -X POST -d '{ "id":3,"group_name":"gr25"}' http://localhost:9090/webapi/v1/groups
+
+
+//user_group
+curl -X POST -d '{ "id":2,"user_id":3}' http://localhost:9090/webapi/v1/usergroup
+
+//user_permission
+curl -X POST -d '{"resource_id":2,"id":2 ,"permission_id":110}' http://localhost:9090/webapi/v1/userpermission
+
+//group_permission
+curl -X POST -d '{"resource_id":2,"id":2 ,"permission_id":110}' http://localhost:9090/webapi/v1/grouppermission

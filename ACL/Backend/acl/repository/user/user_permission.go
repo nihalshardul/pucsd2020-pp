@@ -43,10 +43,10 @@ func (userpermission *userpermissionRepository) Update(cntx context.Context, obj
 	return obj, err
 }
 
-func (userpermission *userpermissionRepository) Delete(cntx context.Context, id int64) error {
+func (userpermission *userpermissionRepository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	//log.Printf("Getting context and creating model.UserPermission object repository/userpermission module")
 	obj := &model.UserPermission{Id: id}
-	return driver.SoftDeleteById(userpermission.conn, obj, id)
+	return driver.DeleteById(userpermission.conn, obj, id)
 }
 
 func (userpermission *userpermissionRepository) GetAll(cntx context.Context) ([]interface{}, error) {

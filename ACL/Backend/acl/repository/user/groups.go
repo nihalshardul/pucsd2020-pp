@@ -43,10 +43,10 @@ func (groups *groupsRepository) Update(cntx context.Context, obj interface{}) (i
 	return obj, err
 }
 
-func (groups *groupsRepository) Delete(cntx context.Context, id int64) error {
+func (groups *groupsRepository) Delete(cntx context.Context, id int64) (interface{}, error){
 	//log.Printf("Getting context and creating model.Groups object repository/groups module")
 	obj := &model.Groups{Id: id}
-	return driver.SoftDeleteById(groups.conn, obj, id)
+	return driver.DeleteById(groups.conn, obj, id)
 }
 
 func (groups *groupsRepository) GetAll(cntx context.Context) ([]interface{}, error) {

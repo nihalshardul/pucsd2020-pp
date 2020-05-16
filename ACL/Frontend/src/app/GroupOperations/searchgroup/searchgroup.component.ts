@@ -33,37 +33,23 @@ export class SearchgroupComponent implements OnInit {
     });
   }
 
-  // ngOnInit(){
-  //   this._api.getUsers().subscribe((data: any[])=>{
-  //     console.log(data);
-  //     this.groups = data;
-  //   // this._api.getUsers().subscribe(data => this.groups = data);
 
-
-  //   });
-  // }
   getid: any;
   id(event:any){
     this.getid = event.target.value;
   }
+  g_id : any;
+  g_name : any;
 
-  // getbyid(event: any){
-    // this.byid = false;
-    // const _id = event.target.value;
-    // this._api.getUserById(_id).subscribe((data: any[])=>{
-    // console.log(data);
-    // this.groups = data;
-    // console.log(this.getid);
-    // })
   getbyid(){
     this.byid = true;
     console.log(this.getid);
     this._api.getGroupById(this.getid).subscribe( res => {
       this.item = res["data"] 
+      this.g_id = this.item["id"]
+      this.g_name = this.item["group_name"]
       console.log("Response", res);
       console.log("Items ",this.item);
-      // console.log(this.groups)
-
       
     });
   }

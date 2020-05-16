@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { MembershipComponent } from './GroupOperations/membership/membership.com
 import { GrantPermissionComponent } from './GroupOperations/grant-permission/grant-permission.component';
 import { ListResourcesComponent } from './ResourceOperations/list-resources/list-resources.component';
 import { CreateResourcesComponent } from './ResourceOperations/create-resources/create-resources.component';
+import { DeleteResourceComponent } from './ResourceOperations/delete-resource/delete-resource.component';
 
 
 @NgModule({
@@ -39,13 +41,15 @@ import { CreateResourcesComponent } from './ResourceOperations/create-resources/
     MembershipComponent,
     GrantPermissionComponent,
     ListResourcesComponent,
-    CreateResourcesComponent
+    CreateResourcesComponent,
+    DeleteResourceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

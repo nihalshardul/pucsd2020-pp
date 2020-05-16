@@ -30,11 +30,11 @@ export class CreateuserComponent implements OnInit {
 
   post = function(data){
     this.newuser = {
+      "id":Number(data.id),
       "first_name":data.first_name,
       "last_name":data.last_name,
       "email":data.email,
-      "password":data.password,
-      "contact_number":data.contact_number
+      "password":data.password
     }
 
     this._api.createUser(this.newuser).subscribe(res => {

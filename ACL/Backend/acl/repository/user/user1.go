@@ -43,10 +43,10 @@ func (user1 *user1Repository) Update(cntx context.Context, obj interface{}) (int
 	return obj, err
 }
 
-func (user1 *user1Repository) Delete(cntx context.Context, id int64) error {
+func (user1 *user1Repository) Delete(cntx context.Context, id int64) (interface{}, error) {
 	//log.Printf("Getting context and creating model.User1 object repository/user1 module")
 	obj := &model.User1{Id: id}
-	return driver.SoftDeleteById(user1.conn, obj, id)
+	return driver.DeleteById(user1.conn, obj, id)
 }
 
 func (user1 *user1Repository) GetAll(cntx context.Context) ([]interface{}, error) {

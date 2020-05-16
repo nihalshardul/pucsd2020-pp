@@ -25,8 +25,8 @@ export class UpdategroupComponent implements OnInit {
 
   put = function(data){
     this.updategroup = {
-      "id":data.id,
-      "groups_name":data.groups_name
+      "id":Number(data.id),
+      "group_name":data.group_name
     }
 
     this._api.updateGroup(this.updategroup).subscribe(res => {

@@ -112,7 +112,7 @@ func (user *ResourcesType) Delete(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		log.Printf("Now calling  delete with req.context and usr object")
-		err = user.repo.Delete(r.Context(), id)
+		_,err = user.repo.Delete(r.Context(), id)
 		if nil != err {
 			break
 		}

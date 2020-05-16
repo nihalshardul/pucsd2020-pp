@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IsrootService } from "../isroot.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  user_root:boolean;
+  constructor( private _isroot: IsrootService) { }
 
   ngOnInit(): void {
+    this._isroot.sharedMessage.subscribe(user_root => this.user_root = user_root)
   }
-
 }

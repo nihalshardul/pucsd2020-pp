@@ -11,6 +11,11 @@ import { DeletegroupComponent } from './GroupOperations/deletegroup/deletegroup.
 import { UpdategroupComponent } from './GroupOperations/updategroup/updategroup.component';
 import { CreategroupComponent } from './GroupOperations/creategroup/creategroup.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MembershipComponent } from './GroupOperations/membership/membership.component';
+import { GrantPermissionComponent } from './GroupOperations/grant-permission/grant-permission.component';
+import { ListResourcesComponent } from './ResourceOperations/list-resources/list-resources.component';
+import { CreateResourcesComponent } from './ResourceOperations/create-resources/create-resources.component';
+import { DeleteResourceComponent } from './ResourceOperations/delete-resource/delete-resource.component';
 
 
 const routes: Routes = [
@@ -25,7 +30,12 @@ const routes: Routes = [
   {path: 'creategroup' , component: CreategroupComponent},
   {path: 'updategroup' , component: UpdategroupComponent},
   {path: 'deletegroup' , component: DeletegroupComponent},
-  {path: 'searchgroup' , component: SearchgroupComponent}
+  {path: 'membership', component: MembershipComponent},
+  {path: 'grouppermission', component: GrantPermissionComponent},
+  {path: 'listresources', component: ListResourcesComponent},
+  {path: 'createresources', component: CreateResourcesComponent},
+  {path: 'searchgroup' , component: SearchgroupComponent},
+  {path: 'deleteresource' , component: DeleteResourceComponent}
 ];
 
 @NgModule({
