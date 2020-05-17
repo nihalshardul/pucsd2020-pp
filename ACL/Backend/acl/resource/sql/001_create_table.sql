@@ -2,10 +2,9 @@ USE ACL;
 
 
 CREATE TABLE IF NOT EXISTS user_info (
-    id                  INT         AUTO_INCREMENT      PRIMARY KEY,
+    id                  INT               PRIMARY KEY,
     first_name          VARCHAR(25)    NOT NULL,
     last_name           VARCHAR(25)    NOT NULL,
-    username            VARCHAR(25)    NOT NULL,
     email               VARCHAR(64)    NOT NULL UNIQUE,
     password            VARBINARY(128)    NOT NULL,
     is_user_root         TINYINT(1)   NOT NULL DEFAULT 0 ,
@@ -52,32 +51,32 @@ CREATE TABLE IF NOT EXISTS resources(
 
 
 CREATE TABLE IF NOT EXISTS user_group (
+    ug_id       INT     AUTO_INCREMENT      PRIMARY KEY,
     id            INT NOT NULL,
     user_id             INT  NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user_info(id) ,
-    FOREIGN KEY(id) REFERENCES groups(id) ,
-    PRIMARY KEY(id,user_id)
+    FOREIGN KEY(id) REFERENCES groups(id) 
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS user_permission
 (
-resource_id INT NOT NULL,
-id INT NOT NULL,
-permission_id INT NOT NULL,
-FOREIGN KEY(id) REFERENCES user_info(id) ,
-FOREIGN KEY(resource_id) REFERENCES resources(id),
-FOREIGN KEY(permission_id) REFERENCES permission(id) ,
-PRIMARY KEY(resource_id,id,permission_id)
+    up_id       INT     AUTO_INCREMENT      PRIMARY KEY,
+    resource_id INT NOT NULL,
+    id INT NOT NULL,
+    permission_id INT NOT NULL,
+    FOREIGN KEY(id) REFERENCES user_info(id) ,
+    FOREIGN KEY(resource_id) REFERENCES resources(id),
+    FOREIGN KEY(permission_id) REFERENCES permission(id) 
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS group_permission
 (
-resource_id INT NOT NULL,
-id INT  NOT NULL, #group
-permission_id INT NOT NULL,
-FOREIGN KEY(id) REFERENCES groups(id) ,
-FOREIGN KEY(resource_id) REFERENCES resources(id) ,
-FOREIGN KEY(permission_id) REFERENCES permission(id),
-PRIMARY KEY(resource_id,id,permission_id)
+    gp_id       INT     AUTO_INCREMENT      PRIMARY KEY,
+    resource_id INT NOT NULL,
+    id INT  NOT NULL, #group
+    permission_id INT NOT NULL,
+    FOREIGN KEY(id) REFERENCES groups(id) ,
+    FOREIGN KEY(resource_id) REFERENCES resources(id) ,
+    FOREIGN KEY(permission_id) REFERENCES permission(id)
 )ENGINE = INNODB CHARACTER SET=utf8;

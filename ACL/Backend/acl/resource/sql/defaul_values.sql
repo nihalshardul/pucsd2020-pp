@@ -1,8 +1,8 @@
 USE ACL;
 /* user_info values*/
 
-insert into user_info (first_name,last_name,username,email,password,is_user_root) values('ACL','SYSTEM','root','acl.system@acl.com','password',1);
-
+insert into user_info (id,first_name,last_name,email,password,is_user_root) values(1,'ACL','SYSTEM','acl.system@acl.com','password',1);
+insert into user_info (id,first_name,last_name,email,password,is_user_root) values(420,'Tushar','Pathare','tushar.pathare@gmail.com','Tushar@123',1);
 /* groups*/
 insert into groups(group_name) values('root');
 

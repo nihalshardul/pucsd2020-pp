@@ -1,0 +1,27 @@
+<h1>List Resources</h1>
+
+<button id="my" type="submit" class="btn btn-primary" (click)=getmy() >My Resources</button>
+
+
+<!-- <button id="all" type="submit" class="btn btn-primary" (click)=getall() >All available Resources</button> -->
+
+<br>
+
+<div>
+    <div *ngIf="resources">
+        <div class="card-columns">
+            <div class="card" >
+                <div *ngIf="file">
+                    <img class="card-img-top" src="/assets/file.png" alt="File">    
+                </div>
+                <div *ngIf="!file">
+                    <img class="card-img-top" src="/assets/folder.jpg" alt="Folder">    
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">{{rname}}</h2>
+                    <h4 class="card-title">{{per}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

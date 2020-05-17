@@ -43,10 +43,10 @@ func (usergroup *usergroupRepository) Update(cntx context.Context, obj interface
 	return obj, err
 }
 
-func (usergroup *usergroupRepository) Delete(cntx context.Context, id int64) error {
+func (usergroup *usergroupRepository) Delete(cntx context.Context, id int64)(interface{}, error){
 	//log.Printf("Getting context and creating model.Usergroup object repository/usergroup module")
 	obj := &model.UserGroup{Id: id}
-	return driver.SoftDeleteById(usergroup.conn, obj, id)
+	return driver.DeleteById(usergroup.conn, obj, id)
 }
 
 func (usergroup *usergroupRepository) GetAll(cntx context.Context) ([]interface{}, error) {

@@ -1,0 +1,40 @@
+
+<h1>Create Resources</h1>
+<br>
+<form id="newresource" name="newresource" #createresource="ngForm" (ngSubmit) = post(createresource.value)>
+    <table>
+        <tr>
+            <td  id="field">Resource Type :</td>
+            <td>
+                <input type="radio" name="type" value="file" ngModel>File
+            </td>
+            <td>
+                <input type="radio" name="type" value="folder" ngModel>Folder
+            </td>
+        </tr>
+        <tr>
+            <td id="field">Resource Name :</td>
+            <td>
+                <input type="text" name="resource_name" id="resource_name" placeholder="resource_name" ngModel><br>
+            </td>
+        </tr>
+        <tr>
+            <td id="field">Resource Path :</td>
+            <td>
+                <input type="text" name="resource_path" id="resource_path" placeholder="lresource_path" ngModel><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" >Create Resource</button>            
+            </td>
+            <td>
+
+                <button type="reset" > Reset</button>
+
+            </td>
+        </tr>
+    </table>
+</form>
+
+<br>
