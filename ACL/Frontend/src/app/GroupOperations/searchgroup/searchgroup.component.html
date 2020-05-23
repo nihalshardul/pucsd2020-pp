@@ -7,10 +7,10 @@ Search
 
 <div *ngIf="byid==false">
     <div class="card-columns" >
-        <div class="card" *ngFor="let group of groups">
+        <div class="card" *ngFor="let group of arr">
             <div id="cd" class="card-body" >
                 <h1>Id : {{group.id}}</h1>
-                <h4>{{group.group_name}}</h4>
+                <h4>{{group.groups_name}}</h4>
             </div>
         </div>
     </div>

@@ -27,6 +27,7 @@ export class CreategroupComponent implements OnInit {
 
   post = function(data){
     this.newgroup = {
+      "id" : Number(data.id),
       "group_name":data.group_name,
     }
     this._api.createGroup(this.newgroup).subscribe(res => {

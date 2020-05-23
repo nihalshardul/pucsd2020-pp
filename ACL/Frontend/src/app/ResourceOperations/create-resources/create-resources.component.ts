@@ -26,7 +26,7 @@ export class CreateResourcesComponent implements OnInit {
   res_id: any;
   user_root: boolean;
   per_id: number;
-  def:any;
+  def: any;
 
   ngOnInit(): void {
     this.value.sharedMessage.subscribe(message => this.message = message)
@@ -39,42 +39,50 @@ export class CreateResourcesComponent implements OnInit {
 
   post = function (data) {
 
-    if (data.value == "file") {
-      this.per = 1
-    } else {
-      this.per = 2
-    }
+    // if (data.value == "file") {
+    //   this.per = 1
+    // } else {
+    //   this.per = 2
+    // }
+    this.per = Number( data.type)
+    console.log("Valid",this.per)
     this.name = data.resource_name
     this.path = data.resource_path
     this.res = {
+      "id": Number(data.id),
       "resource_type_id": this.per,
       "resource_name": this.name,
       "resource_path": this.path,
     }
     this.u_id = this.id.getValue()
-
+    console.log("too :",this.res)
+    console.log("user_id",this.u_id)
     this._api.createResources(this.res).subscribe(result => {
       this.item = result["message"]
       if (this.item == undefined) {
 
         this.resr = result["data"];
         // console.log("Response", res);
-        console.log(result)
+        console.log("Res Creation",result)
         this.res_id = Number(this.resr["id"])
         this.per_id = 111
         this.usrres = {
           "resource_id": this.res_id,
-          "user_id": this.u_id,
+          "id": this.u_id,
           "permission_id": this.per_id,
         }
+        console.log("to put in :",this.usrres)
         this._api.createUserpermission(this.usrres).subscribe(result => {
           this.def = result["data"];
-          console.log(this.def)
+          console.log("result : ",result)
+          console.log("User Permission : ",this.def)
           alert("Resource Added...")
         });
+        console.log(this.res_id)
 
 
       } else {
+        console.log(this.item)
         alert("Invalid Path...")
       }
     });

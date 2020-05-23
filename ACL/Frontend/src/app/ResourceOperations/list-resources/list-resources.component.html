@@ -1,25 +1,38 @@
 <h1>List Resources</h1>
 
-<button id="my" type="submit" class="btn btn-primary" (click)=getmy() >My Resources</button>
+<button id="my" type="submit" class="btn btn-primary" (click)=getmy()>My Resources</button>
 
 
-<!-- <button id="all" type="submit" class="btn btn-primary" (click)=getall() >All available Resources</button> -->
+<button id="all" type="submit" class="btn btn-primary" (click)=mygrp()>Accessed Group List</button>
 
 <br>
 
 <div>
-    <div *ngIf="resources">
+    <div *ngIf="content">
         <div class="card-columns">
-            <div class="card" >
-                <div *ngIf="file">
-                    <img class="card-img-top" src="/assets/file.png" alt="File">    
+            <div class="card" *ngFor="let user of show">
+                <div id="cd" class="card-body">
+                    <div *ngIf="user.id==1">
+                        <img class="card-img-top" src="/assets/file.png" alt="File">
+                    </div>
+                    <div *ngIf="user.id==2">
+                        <img class="card-img-top" src="/assets/folder.jpg" alt="Folder">
+                    </div>
+                    <h4>{{user.first_name}}</h4>
+                    <h5>{{user.last_name}}</h5>
+                    <td>{{user.email}}</td>
+                    <!-- <td>{{user.contact_number}}</td> -->
                 </div>
-                <div *ngIf="!file">
-                    <img class="card-img-top" src="/assets/folder.jpg" alt="Folder">    
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title">{{rname}}</h2>
-                    <h4 class="card-title">{{per}}</h4>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!content">
+        <div class="card-columns">
+            <div class="card" *ngFor="let user of shw_usr_grp">
+                <div id="cd" class="card-body">
+                    <h2>GroupId : {{user.id}}</h2>
+                    <h4>Group Name :{{user.first_name}}</h4>
+                    <!-- <td>{{user.contact_number}}</td> -->
                 </div>
             </div>
         </div>

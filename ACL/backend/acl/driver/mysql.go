@@ -292,14 +292,84 @@ func GetById(conn *sql.DB, object model.IModel, id int64) (model.IModel, error) 
 	return object, nil
 }
 
-func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
+// func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
 
+// 	rValue := reflect.ValueOf(object)
+// 	rType := reflect.TypeOf(object)
+
+// 	columns := []string{}
+// 	pointers := make([]interface{}, 0)
+
+// 	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
+// 		field := rType.Elem().Field(idx)
+// 		if COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
+// 			continue
+// 		}
+
+// 		column := field.Tag.Get("column")
+// 		columns = append(columns, column)
+// 		pointers = append(pointers, rValue.Elem().Field(idx).Addr().Interface())
+// 	}
+// 	fmt.Println(columns)
+// 	// fmt.Println(pointers)
+// 	var queryBuffer bytes.Buffer
+// 	var params []interface{}
+
+// 	queryBuffer.WriteString("SELECT ")
+// 	queryBuffer.WriteString(strings.Join(columns, ", "))
+// 	queryBuffer.WriteString(" FROM ")
+// 	queryBuffer.WriteString(object.Table())
+// 	if 0 != limit && 0 != offset {
+// 		queryBuffer.WriteString(" LIMIT ? OFFSET ?")
+// 		params = append(params, limit)
+// 		params = append(params, offset)
+// 	}
+
+// 	// fmt.Println(queryBuffer)
+// 	query := queryBuffer.String()
+
+// 	row, err := conn.Query(query, params...)
+
+// 	if nil != err {
+// 		log.Printf("Error conn.Query: %s\n\tError Query: %s\n", err.Error(), query)
+// 		return nil, err
+// 	}
+
+// 	defer row.Close()
+// 	objects := make([]interface{}, 0)
+// 	// fmt.Println(object.Table())
+// 	fmt.Println(query)
+// 	for row.Next() {
+// 		// if row.Next() == false {
+// 		// 	fmt.Println("Connection Disconnected...")
+// 		// }
+// 		if nil != err {
+// 			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
+// 			return nil, err
+// 		}
+// 		err = row.Scan(pointers...)
+// 		// err = row.Scan(&columns...)
+// 		// fmt.Println(pointers)
+// 		// fmt.Println("Now :")
+// 		// fmt.Println(row.Next())
+// 		if nil != err {
+// 			log.Printf("Error: row.Scan: %s\n", err.Error())
+// 			return nil, err
+// 		}
+
+// 		objects = append(objects, object)
+// 		fmt.Println(object)
+// 	}
+
+// 	return objects, nil
+// }
+
+// Array of Array code
+
+func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
 	rValue := reflect.ValueOf(object)
 	rType := reflect.TypeOf(object)
-
 	columns := []string{}
-	pointers := make([]interface{}, 0)
-
 	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
 		field := rType.Elem().Field(idx)
 		if COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
@@ -308,9 +378,9 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 
 		column := field.Tag.Get("column")
 		columns = append(columns, column)
-		pointers = append(pointers, rValue.Elem().Field(idx).Addr().Interface())
-	}
 
+	}
+	fmt.Println(columns)
 	var queryBuffer bytes.Buffer
 	var params []interface{}
 
@@ -325,95 +395,37 @@ func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface
 	}
 
 	query := queryBuffer.String()
-
-	row, err := conn.Query(query, params...)
-
+	row, err := conn.Query(query) // params...)
 	if nil != err {
 		log.Printf("Error conn.Query: %s\n\tError Query: %s\n", err.Error(), query)
 		return nil, err
 	}
-
 	defer row.Close()
 	objects := make([]interface{}, 0)
+
+	cols, err := row.Columns() // Remember to check err afterwards
+
 	for row.Next() {
 		if nil != err {
 			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
 			return nil, err
 		}
-
-		err = row.Scan(pointers...)
+		vals := make([]interface{}, len(cols))
+		writeCols := make([]string, len(cols))
+		for i, _ := range cols {
+			vals[i] = &writeCols[i]
+		}
+		err = row.Scan(vals...)
 		if nil != err {
+
 			log.Printf("Error: row.Scan: %s\n", err.Error())
 			return nil, err
 		}
-
-		objects = append(objects, object)
+		objects = append(objects, vals)
 	}
 
 	return objects, nil
 }
-
-// Array of Array code
-
-// func GetAll(conn *sql.DB, object model.IModel, limit, offset int64) ([]interface{}, error) {
-// 	rValue := reflect.ValueOf(object)
-// 	rType := reflect.TypeOf(object)
-// 	columns := []string{}
-// 	for idx := 0; idx < rValue.Elem().NumField(); idx++ {
-// 		field := rType.Elem().Field(idx)
-// 		if COLUMN_INGNORE_FLAG == field.Tag.Get("ignore") {
-// 			continue
-// 		}
-
-// 		column := field.Tag.Get("column")
-// 		columns = append(columns, column)
-
-// 	}
-// 	var queryBuffer bytes.Buffer
-// 	var params []interface{}
-
-// 	queryBuffer.WriteString("SELECT ")
-// 	queryBuffer.WriteString(strings.Join(columns, ", "))
-// 	queryBuffer.WriteString(" FROM ")
-// 	queryBuffer.WriteString(object.Table())
-// 	if 0 != limit && 0 != offset {
-// 		queryBuffer.WriteString(" LIMIT ? OFFSET ?")
-// 		params = append(params, limit)
-// 		params = append(params, offset)
-// 	}
-
-// 	query := queryBuffer.String()
-// 	row, err := conn.Query(query)// params...)
-// 	if nil != err {
-// 		log.Printf("Error conn.Query: %s\n\tError Query: %s\n", err.Error(), query)
-// 		return nil, err
-// 	}
-// 	defer row.Close()
-// 	objects := make([]interface{}, 0)
-
-// 	cols, err := row.Columns() // Remember to check err afterwards
-
-// 	for row.Next() {
-// 		if nil != err {
-// 			log.Printf("Error row.Columns(): %s\n\tError Query: %s\n", err.Error(), query)
-// 			return nil, err
-// 		}
-// 		vals := make([]interface{}, len(cols))
-// 		writeCols := make([]string, len(cols))
-// 		for i, _ := range cols {
-// 			vals[i] = &writeCols[i]
-// 		}
-// 		err = row.Scan(vals...)
-// 		if nil != err {
-
-// 			log.Printf("Error: row.Scan: %s\n", err.Error())
-// 			return nil, err
-// 		}
-// 		objects = append(objects, vals)
-// 	}
-
-// 	return objects, nil
-// }
 
 func DeleteById(conn *sql.DB, object model.IModel, id int64) (sql.Result, error) {
 	var queryBuffer bytes.Buffer

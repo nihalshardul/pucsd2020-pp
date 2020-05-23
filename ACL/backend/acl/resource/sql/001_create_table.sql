@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS user_info (
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS groups (
-    id            INT         AUTO_INCREMENT      PRIMARY KEY,
+    id            INT          PRIMARY KEY,
     group_name           VARCHAR(50)    NOT NULL,            
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
     last_update         DATETIME    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -31,16 +31,15 @@ CREATE TABLE IF NOT EXISTS permission (
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS resources_type(
-id INT  PRIMARY KEY,
-resource_info varchar(50) NOT NULL
+    id INT  PRIMARY KEY,
+    resource_info varchar(50) NOT NULL
 )ENGINE = INNODB CHARACTER SET=utf8;
 
 
 
 CREATE TABLE IF NOT EXISTS resources(
-    id            INT        AUTO_INCREMENT      PRIMARY KEY,
+    id            INT            PRIMARY KEY,
     resource_type_id    INT    NOT NULL,
-    resource_parent INT NOT NULL,
     resource_name    VARCHAR(50)    NOT NULL, 
     resource_path    VARCHAR(100)    NOT NULL, 
     creation_date       DATETIME    DEFAULT CURRENT_TIMESTAMP,
