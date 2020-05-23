@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  ApiService } from "../../api.service";
 import { UserloginService } from "../../userlogin.service";
 import { Router } from '@angular/router';
+import { Group } from '../../models/group';
 
 @Component({
   selector: 'app-searchgroup',
@@ -23,13 +24,23 @@ export class SearchgroupComponent implements OnInit {
   byid=false;
   groups : any;
   item : any [];
-
+  arr: Array<Group> = [];
 
   getall(){           // for endpoint 
     this._api.getGroup().subscribe(res => {
     this.groups = res["data"]; 
     console.log("Response", res);
     console.log(this.groups)
+
+    for (let index = 0; index < (this.groups).length; index++) {
+      let userObj = new Group();     // for storing objects
+      userObj.id = this.groups[index][0]
+      userObj.groups_name = this.groups[index][1]
+      console.log(userObj)
+      this.arr.push(userObj)
+    }
+    console.log("Array => ",this.arr)
+
     });
   }
 

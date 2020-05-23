@@ -4,12 +4,18 @@
 <form id="newresource" name="newresource" #createresource="ngForm" (ngSubmit) = post(createresource.value)>
     <table>
         <tr>
+            <td  id="field">Resource Id :</td>
+            <td>
+                <input type="text" name="id" id="id" placeholder="id" ngModel><br>
+            </td>
+        </tr>
+        <tr>
             <td  id="field">Resource Type :</td>
             <td>
-                <input type="radio" name="type" value="file" ngModel>File
+                <input type="radio" name="type" id = "type" value="1" ngModel>File
             </td>
             <td>
-                <input type="radio" name="type" value="folder" ngModel>Folder
+                <input type="radio" name="type" id = "type" value="2" ngModel>Folder
             </td>
         </tr>
         <tr>

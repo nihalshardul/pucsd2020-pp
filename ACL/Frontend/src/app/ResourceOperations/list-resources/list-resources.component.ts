@@ -3,6 +3,9 @@ import { ApiService } from "../../api.service";
 import { UserloginService } from "../../userlogin.service";
 import { Router } from '@angular/router';
 import { IsrootService } from "../../isroot.service";
+import { Userpermission } from '../../models/userpermission';
+import { User } from '../../models/user';
+import { Usergroup } from '../../models/usergroup';
 
 @Component({
   selector: 'app-list-resources',
@@ -12,12 +15,12 @@ import { IsrootService } from "../../isroot.service";
 export class ListResourcesComponent implements OnInit {
 
   message: boolean;
-  u_id : any;
+  u_id: any;
   file: boolean;
   val: any;
   per: any;
-  fp:number;
-  user_root:boolean;
+  fp: number;
+  user_root: boolean;
 
   constructor(private id: IsrootService, private _api: ApiService, private value: UserloginService, private router: Router) { }
 
@@ -32,51 +35,87 @@ export class ListResourcesComponent implements OnInit {
   rvalue: number;
   resr: any;
   rs: any;
-  rname : any;
+  rname: any;
   resources: Boolean = false;
-  rtype : any;
+  rtype: any;
   item: any;
+  arr: Array<Userpermission> = [];
+  show: Array<User> = [];
+  usr_grp: Array<Usergroup> = [];
+  content: Boolean = false;
+  gn: any;
+  shw_usr_grp: Array<User> = [];
 
-  getmy(){
-    this.u_id = this.id.getValue() 
-    this.resources=true;
-    this._api.getUserpermissionById(this.u_id).subscribe(res => {
+  getmy() {
+    this.content = true
+    this.u_id = this.id.getValue()
+    this.resources = true;
+    this._api.getUserpermission().subscribe(res => {
       this.resr = res["data"];
       // console.log("Response", res);
-      console.log(this.resr)
-      this.val = this.resr["permission_id"]
-      if(this.val == 100){
-        this.per = "read"
-      }else if(this.val == 110 ){
-        this.per = "write"
-      }else{
-        this.per = "read  write  execute"
-      }
-      this.fp = this.resr["resource_id"]
-      this.rvalue = Number(this.fp)
-         
-    
-    this._api.getResourcesById(this.rvalue).subscribe(rp => {
-      this.item = res["message"]
-      if (this.item == undefined) {
-        
-        this.rs = rp["data"];
-        console.log("Response", rp);
-        console.log(this.rs)
-        this.rname = this.rs["resource_name"]
-        this.rtype = this.rs["resource_type_id"]
-        // console.log("value",typeof(this.rvalue))
-        if(this.rtype == 1){
-          this.file = true
-        }else{
-          this.file = false
+
+      for (let index = 0; index < (this.resr).length; index++) {
+        let userObj = new Userpermission();     // for storing objects
+        userObj.resource_id = this.resr[index][0]
+        userObj.id = this.resr[index][1]
+        userObj.permission_id = this.resr[index][2]
+        // console.log(userObj)
+        if (userObj.id == this.u_id) {
+          this.arr.push(userObj)    // push userpermission to arr
+          this._api.getResourcesById(Number(userObj.resource_id)).subscribe(rp => {
+            this.rs = rp["data"]
+            let data_show = new User();
+            data_show.first_name = this.rs["resource_name"]
+            data_show.id = this.rs["resource_type_id"]
+
+            if (userObj.permission_id == 100) {
+              data_show.email = "read"
+            } else if (userObj.permission_id == 110) {
+              data_show.email = "write"
+            } else {
+              data_show.email = "read  write  execute"
+            }
+
+            this.show.push(data_show)
+          });
         }
-      }else{
-        alert("No Resources made by you...");
       }
+
+      console.log("Arr => ", this.show)
+
     });
-  });
   }
 
+  mygrp() {
+    this.content = false
+    this.u_id = this.id.getValue()
 
+    this._api.getUserGroup().subscribe(res => {
+      this.resr = res["data"];
+      console.log("Response", res);
+
+      for (let index = 0; index < (this.resr).length; index++) {
+        let userObj = new Usergroup();     // for storing objects
+        userObj.id = this.resr[index][0]
+        userObj.user_id = this.resr[index][1]
+        // console.log(userObj)
+        if (userObj.user_id == this.u_id) {
+          this._api.getGroupById(userObj.id).subscribe(rp => {
+            this.rs = rp["data"]
+            this.gn = this.rs["group_name"]
+            console.log(rp)
+            let data_show = new User();
+
+            data_show.id = userObj.id
+            data_show.first_name = this.gn
+
+            this.shw_usr_grp.push(data_show)
+            
+          });
+          // this.usr_grp.push(userObj)    // push userpermission to arr
+        }
+      }
+    });
+    console.log(this.shw_usr_grp)
+  }
 }

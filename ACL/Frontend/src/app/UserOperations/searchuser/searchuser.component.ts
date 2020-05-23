@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from "../../api.service";
 import { UserloginService } from "../../userlogin.service";
 import { Router } from '@angular/router';
-
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-searchuser',
@@ -27,12 +27,25 @@ export class SearchuserComponent implements OnInit {
   u_id : any;
   u_f_name :any;
   u_l_name : any;
+  arr: Array<User> = [];
 
   getall() {           // for endpoint 
     this._api.getUsers().subscribe(res => {
       this.users = res["data"];
       console.log("Response", res);
-      console.log(this.users)
+      console.log(this.users)     //  List of object [{Object},{Object}]
+      
+      for (let index = 0; index < (this.users).length; index++) {
+        let userObj = new User();     // for storing objects
+        userObj.id = this.users[index][0]
+        userObj.first_name = this.users[index][1]
+        userObj.last_name = this.users[index][2]
+        console.log(userObj)
+        this.arr.push(userObj)
+      }
+      console.log("Array => ",this.arr)
+
+
     });
   }
   getid: any;

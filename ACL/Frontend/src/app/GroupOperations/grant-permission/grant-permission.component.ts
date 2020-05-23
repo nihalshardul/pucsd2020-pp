@@ -24,7 +24,7 @@ export class GrantPermissionComponent implements OnInit {
   per: any;
   groupres: Object = {};
   isAdded: Boolean = false;
-  Confirmation: String = "User Added to Group";
+  Confirmation: String = "Permission Granted for resource...";
 
   post = function (data) {
 
